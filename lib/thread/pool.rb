@@ -120,7 +120,7 @@ class Thread::Pool
 		@done       = ConditionVariable.new
 		@done_mutex = Mutex.new
 
-		@todo     = []
+		@todo     = Queue.new
 		@workers  = []
 		@timeouts = {}
 
@@ -240,7 +240,7 @@ class Thread::Pool
 
 			@todo << task
 
-			if @waiting == 0 && @spawned < @max
+			if @waiting < @todo.length && @spawned < @max
 				spawn_thread
 			end
 
