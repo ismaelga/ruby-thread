@@ -120,7 +120,7 @@ class Thread::Pool
 		@done       = ConditionVariable.new
 		@done_mutex = Mutex.new
 
-		@todo     = Queue.new
+		@todo     = []
 		@workers  = []
 		@timeouts = {}
 
